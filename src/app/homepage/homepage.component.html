@@ -1,0 +1,49 @@
+
+
+  
+  
+  
+  <div class="content background" role="main">
+  
+      <div class="container" style="width: 50%;">
+        <form #homepage="ngForm" >
+          <br>
+          <br>
+          <h2>Homepage</h2>
+          <h2>Hi lynkit@app.com!!</h2>
+          <br>
+          <br>
+            <div class="form-group">
+                <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx">
+                <button type="button" class="btn btn-success" (click)="Upload()" >Upload</button>
+            </div>
+            
+            
+             <div id="xlsxcontnt" #xlsxcontnt>
+              <table >
+              <thead align="center">
+                <tr>
+                     <th *ngFor="let col of keys">{{col}}</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr *ngFor = "let rows of xlsxdata ">
+                    <td *ngFor="let col of keys"> 
+                        {{rows[col]}}
+                    </td>
+                </tr>
+              
+            </tbody>
+            </table>
+            </div>  
+            <br><br>
+            <button *ngIf="xlsxdata.length>0" type="button" class="btn btn-success" (click)="Download()" >Download Data in PDF</button>
+            <!-- <button  type="button" class="btn btn-success" (click)="ShowJson()" >Show Package Data</button>
+          --></form> 
+      </div>
+  
+  </div>
+
+  

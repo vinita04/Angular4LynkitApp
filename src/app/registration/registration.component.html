@@ -1,0 +1,92 @@
+
+
+<style>
+  .background {
+   width: 100%;
+   height: 100vh;
+   background: url('../../assets/bk.jpg') no-repeat;
+   background-size: cover;
+   color: white;
+}
+  </style>
+  
+  
+  
+  <div class="content background" role="main">
+  
+      <div class="container" style="width: 50%;">
+        <form #registrationForm="ngForm" >
+          <br>
+          <br>
+          <h1>Registration Form</h1>
+          <br/>
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" class="form-control"  minlength="3" id="name" [(ngModel)]="usrname" name="name" required #name="ngModel">
+              <div [hidden]="name.valid || name.pristine"
+                class="alert alert-danger">
+                Minimum 3 characters are required
+              </div>	
+            </div>
+  
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email"  class="form-control" id="email" [(ngModel)]="usremail" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required   #email="ngModel">
+             <div [hidden]="email.valid || email.pristine"
+                class="alert alert-danger">
+                Must be an email ID
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="phonenum">Mobile No</label>
+              <input type="text" class="form-control"  maxlength="10" id="phonenum"  pattern="^((\\+91-?)|0)?[0-9]{10}$" [(ngModel)]="usrphone"  name="phonenum" required #phonenum="ngModel">
+              <div [hidden]="phonenum.valid || phonenum.pristine"
+                class="alert alert-danger">
+                Please enter 10 digits valid Mobile Number
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password"  pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$"   required   [(ngModel)]="usrpwd" name="password" #pwd="ngModel">
+               <div [hidden]="pwd.valid || pwd.pristine"
+                class="alert alert-danger">
+                Password must include at least an uppercase, a number & a
+                special character  
+              </div> 
+              <!-- <div
+                ng-messages="registrationForm.password.$error">
+                <div ng-message="pattern">Password should be atleast 8 characters long
+                    and should contain one number,one character and one special
+                    character</div>
+                <div ng-message="required">Password should be atleast 8 characters
+                    long and should contain one number,one character and one special
+                    character</div>
+            </div> -->
+            </div>
+
+            <div class="form-group">
+                <label for="confirmpassword">Confirm Password</label>
+                <input type="password" class="form-control"    id="confirmpassword" required [(ngModel)]="usrconfirmPwd" name="confirmpassword" #confirmPwd="ngModel">
+                
+            </div>
+            <div *ngIf="(pwd.invalid || pwd.value != confirmPwd.value) && (pwd.touched)"
+                class="alert alert-danger">
+                
+                <div *ngIf = "pwd.invalid; else nomatch">
+                    Password needs to be more than 8 characters
+                </div>
+                    <ng-template #nomatch >
+                        Passwords don't match
+                    </ng-template>
+                </div>
+            <button style="margin:5px;" type="submit" class="btn btn-success" [disabled]="registrationForm.invalid" (click)="registrationForm.reset()">Sign Up</button>
+              
+            <button style="margin:5px;" type="submit" class="btn btn-success"  routerLink="/login-component">Sign In</button>
+          </form>
+      </div>
+  
+  </div>
+  
+  
